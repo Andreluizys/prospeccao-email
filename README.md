@@ -27,7 +27,7 @@ Status "Enviado dd/mm/aaaa" na planilha
 1. Tenha o [Claude Code](https://claude.com/claude-code) e o Python 3.10+ instalados.
 2. Copie esta pasta para as suas skills:
    ```bash
-   git clone https://github.com/SEU-USUARIO/prospeccao-email ~/.claude/skills/prospeccao-email
+   git clone https://github.com/Andreluizys/prospeccao-email ~/.claude/skills/prospeccao-email
    ```
 3. Instale as dependências:
    ```bash
