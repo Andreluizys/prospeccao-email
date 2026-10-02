@@ -68,6 +68,8 @@ No `config.json`, bloco `smtp`:
 | Outlook / Microsoft 365                      | `outlook`  | smtp-mail.outlook.com : 587 |
 | Outro (Brevo, Amazon SES, Mailgun...)        | — use `"host"` e `"porta"` | |
 
+**Cópia (Cc):** na planilha, escreva `sim` na coluna **Cópia** dos e-mails que devem ir com cópia para o `copia_padrao` do config, ou escreva outro endereço. Linhas com a coluna vazia vão sem cópia.
+
 Se a porta 465 for recusada, o script tenta a 587 sozinho.
 
 ## Listas grandes (milhares de e-mails)

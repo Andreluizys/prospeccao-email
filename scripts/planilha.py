@@ -16,8 +16,8 @@ import openpyxl
 from openpyxl.styles import Alignment, Font, PatternFill
 
 COLUNAS = ['E-mail', 'Empresa', 'Contato', 'Site', 'Segmento', 'Nicho', 'Assunto', 'Corpo do e-mail',
-           'Status', 'Observação']
-LARGURAS = [32, 28, 18, 30, 22, 30, 45, 80, 20, 30]
+           'Cópia', 'Status', 'Observação']
+LARGURAS = [32, 28, 18, 30, 22, 30, 45, 80, 12, 20, 30]
 
 p = argparse.ArgumentParser()
 p.add_argument('--jsonl', default='emails.jsonl')
@@ -39,6 +39,9 @@ else:
         ws.column_dimensions[c.column_letter].width = w
     ws.freeze_panes = 'A2'
 
+for nome in COLUNAS:  # planilha antiga sem alguma coluna: acrescenta no fim
+    if nome not in [c.value for c in ws[1]]:
+        ws.cell(1, ws.max_column + 1, nome).font = Font(bold=True)
 col = {c.value: i for i, c in enumerate(ws[1])}
 existentes = {str(r[col['E-mail']] or '').lower() for r in ws.iter_rows(min_row=2, values_only=True)}
 
@@ -53,8 +56,11 @@ for linha in Path(a.jsonl).read_text(encoding='utf-8').splitlines():
     if email and email in existentes:
         continue
     existentes.add(email)
-    ws.append([email, e.get('empresa'), e.get('contato'), e.get('site'), e.get('segmento'), e.get('nicho'),
-               e.get('assunto'), e.get('corpo'), e.get('status') or 'Rascunho', e.get('observacao')])
+    valores = {'E-mail': email, 'Empresa': e.get('empresa'), 'Contato': e.get('contato'), 'Site': e.get('site'),
+               'Segmento': e.get('segmento'), 'Nicho': e.get('nicho'), 'Assunto': e.get('assunto'),
+               'Corpo do e-mail': e.get('corpo'), 'Cópia': e.get('copia'), 'Status': e.get('status') or 'Rascunho',
+               'Observação': e.get('observacao')}
+    ws.append([valores.get(c.value) for c in ws[1]])
     for c in ws[ws.max_row]:
         c.alignment = Alignment(wrap_text=True, vertical='top')
     novos += 1
@@ -63,3 +69,4 @@ ws.auto_filter.ref = ws.dimensions
 wb.save(xlsx)
 print(f'{novos} linha(s) nova(s) em {xlsx}' + (f' ({sem_email} sem e-mail de destino)' if sem_email else ''))
 print('Revise a planilha: troque o Status para "Não enviar" no que não quiser mandar.')
+print('Coluna Cópia: escreva "sim" para copiar o e-mail padrão do config, ou um endereço para copiar outro.')

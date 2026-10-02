@@ -8,6 +8,7 @@ Uso:
 A senha é pedida na hora (ou lida da variável de ambiente SMTP_SENHA) e nunca é salva.
 O Status é gravado na planilha a cada envio: se cair no meio, ninguém recebe duas vezes.
 Endereços em descadastro.txt (um por linha) nunca recebem.
+Cópia: só nas linhas com a coluna Cópia preenchida ("sim" = smtp.copia_padrao do config, ou um e-mail).
 """
 import argparse, getpass, json, os, random, smtplib, ssl, sys, time
 from datetime import datetime
@@ -122,8 +123,11 @@ for i, row in enumerate(fila, 1):
     msg = EmailMessage()
     msg['From'] = formataddr((smtp_cfg.get('nome_exibicao') or remetente, remetente))
     msg['To'] = para
-    if smtp_cfg.get('copia') and not a.teste:
-        msg['Cc'] = smtp_cfg['copia']
+    copia = str(row[col['Cópia']].value or '').strip() if 'Cópia' in col else ''
+    if copia.lower() in ('sim', 's', 'x', 'yes'):
+        copia = smtp_cfg.get('copia_padrao', '')
+    if '@' in copia and not a.teste:
+        msg['Cc'] = copia
     msg['Reply-To'] = remetente
     msg['Subject'] = row[col['Assunto']].value
     msg['Message-ID'] = make_msgid(domain=remetente.split('@')[1])

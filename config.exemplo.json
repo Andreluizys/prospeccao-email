@@ -27,7 +27,7 @@
     "provedor": "uolhost",
     "remetente": "comercial@suaempresa.com.br",
     "nome_exibicao": "Seu Nome | Empresa",
-    "copia": "",
+    "copia_padrao": "vendas@suaempresa.com.br",
     "limite_por_dia": 200,
     "intervalo_segundos": [40, 90]
   }
