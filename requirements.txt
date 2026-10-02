@@ -1,0 +1,5 @@
+requests>=2.31
+beautifulsoup4>=4.12
+openpyxl>=3.1
+# opcional, só para gerar_com_api.py
+anthropic>=0.40

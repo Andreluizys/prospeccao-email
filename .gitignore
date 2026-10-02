@@ -1,0 +1,8 @@
+# dados pessoais e de clientes: nunca sobem pro GitHub
+config.json
+descadastro.txt
+*.xlsx
+*.csv
+*.jsonl
+.env
+__pycache__/

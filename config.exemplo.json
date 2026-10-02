@@ -1,0 +1,34 @@
+{
+  "representante": {
+    "nome": "Seu Nome",
+    "cargo": "Representante Comercial",
+    "empresa": "Empresa que você representa",
+    "site": "https://www.suaempresa.com.br",
+    "telefone": "(12) 99999-9999"
+  },
+  "oferta": {
+    "resumo": "O que a empresa vende, em uma frase.",
+    "produtos": [
+      "Produto/serviço 1 - para quem serve e principal benefício",
+      "Produto/serviço 2 - para quem serve e principal benefício"
+    ],
+    "diferenciais": [
+      "Ex.: entrega em 5 dias úteis",
+      "Ex.: atende pedidos pequenos",
+      "Ex.: 20 anos de mercado"
+    ],
+    "publico_alvo": "Ex.: indústrias, distribuidoras e comércio do Vale do Paraíba e ABC"
+  },
+  "tom": "profissional, cordial e direto",
+  "assinatura": "Atenciosamente,\nSeu Nome\nRepresentante Comercial | Empresa\n(12) 99999-9999\nwww.suaempresa.com.br",
+  "linha_descadastro": "Se não quiser mais receber nossos contatos, basta responder com \"remover\".",
+
+  "smtp": {
+    "provedor": "uolhost",
+    "remetente": "comercial@suaempresa.com.br",
+    "nome_exibicao": "Seu Nome | Empresa",
+    "copia": "",
+    "limite_por_dia": 200,
+    "intervalo_segundos": [40, 90]
+  }
+}
